@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface BotComponent {
+public @interface BotComponentScan {
 
     /**
      * 要扫描的包名

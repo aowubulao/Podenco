@@ -1,7 +1,6 @@
 package com.neoniou.bot.handler;
 
 import com.neoniou.bot.message.annotation.handler.BotHandler;
-import com.neoniou.bot.message.annotation.handler.MessageMapping;
 import net.mamoe.mirai.event.events.MessageEvent;
 
 /**
@@ -11,7 +10,7 @@ import net.mamoe.mirai.event.events.MessageEvent;
 @BotHandler(name = "Sample")
 public class SampleHandler {
 
-    @MessageMapping(name = "replyHelloMapping", matchStr = "HelloWorld")
+    @BotHandler(name = "replyHelloMapping", matchStr = "HelloWorld")
     public void replyHelloMapping(MessageEvent event) {
         event.getSubject().sendMessage("Hello World!");
     }

@@ -1,9 +1,7 @@
 package com.neoniou.bot.core;
 
 import com.neoniou.bot.config.PodencoConfig;
-import com.neoniou.bot.message.annotation.application.BotComponent;
-
-import java.util.concurrent.ExecutorService;
+import com.neoniou.bot.message.AnnotationRegistrar;
 
 /**
  * @author Neo.Zzj
@@ -18,7 +16,7 @@ public class PodencoCore {
     }
 
     public static void run(Class<?> mainClass, PodencoConfig config, String... args) {
-
+        AnnotationRegistrar.run(mainClass);
     }
 
     public PodencoCore(PodencoConfig podencoConfig, Class<?> mainClass) {
