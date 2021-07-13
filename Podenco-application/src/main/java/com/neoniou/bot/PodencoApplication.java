@@ -11,7 +11,6 @@ import com.neoniou.bot.message.annotation.application.BotComponentScan;
 public class PodencoApplication {
 
     public static void main(String[] args) {
-        System.out.println(System.getProperty("user.dir"));
         PodencoCore.run(PodencoApplication.class);
     }
 }

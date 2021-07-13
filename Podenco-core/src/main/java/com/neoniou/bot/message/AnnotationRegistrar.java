@@ -12,7 +12,7 @@ public class AnnotationRegistrar {
     public static void run(Class<?> mainClass) {
         BotComponentScan componentScan = mainClass.getAnnotation(BotComponentScan.class);
         if (componentScan != null) {
-            HandlerRegistrar.run(componentScan.ScanPackage());
+            HandlerRegistrar.start(componentScan.ScanPackage());
         }
     }
 }

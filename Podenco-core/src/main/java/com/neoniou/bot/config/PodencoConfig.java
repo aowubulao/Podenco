@@ -7,9 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.mamoe.mirai.utils.MiraiLoggerPlatformBase;
 
 import java.util.Scanner;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.*;
 
 /**
  * @author Neo.Zzj
@@ -21,43 +22,64 @@ import java.util.concurrent.ExecutorService;
 @AllArgsConstructor
 public class PodencoConfig {
 
-    public static final String CONFIG_FILE = System.getProperty("user.dir") + "/data/podenco.json";
+    public static final String CONFIG_FILE = System.getProperty("user.dir") + "/data/system/podenco.json";
 
     private Long qq;
 
     private String password;
 
+    private boolean isHealthCheck = true;
+
+    private long healthCheckInterval = 30 * 1000L;
+
     private ExecutorService threadPool;
 
-    public static PodencoConfig getConfig() {
+    private MiraiLoggerPlatformBase logger;
+
+    private void getConfig() {
         if (!FileUtil.exist(CONFIG_FILE)) {
             PodencoConfig podencoConfig = inputAccount();
             FileUtil.writeUtf8String(JSONUtil.parseObj(podencoConfig).toString(), CONFIG_FILE);
-
-            return podencoConfig;
         }
+
         String configStr = FileUtil.readUtf8String(CONFIG_FILE);
         JSONObject configJson = JSONUtil.parseObj(configStr);
 
+        this.qq = configJson.getLong("qq");
+        this.password = configJson.getStr("password");
+    }
+
+    private PodencoConfig inputAccount() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入QQ账号：");
+        this.qq = scanner.nextLong();
+
+        System.out.println("请输入密码：");
+        this.password = scanner.next();
+
         return PodencoConfig
                 .builder()
-                .qq(configJson.getLong("qq"))
-                .password(configJson.getStr("password"))
+                .qq(this.qq)
+                .password(this.password)
                 .build();
     }
 
-    private static PodencoConfig inputAccount() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("请输入QQ账号：");
-        long qq = scanner.nextLong();
+    public void createDefaultThreadPool() {
+        this.threadPool = new ThreadPoolExecutor(8,
+                10,
+                5L,
+                TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(6),
+                Executors.defaultThreadFactory(),
+                new ThreadPoolExecutor.CallerRunsPolicy());
+    }
 
-        System.out.println("请输入密码：");
-        String password = scanner.next();
-
-        return PodencoConfig
-                .builder()
-                .qq(qq)
-                .password(password)
-                .build();
+    public void checkConfig() {
+        if (this.qq == null || this.password == null) {
+            getConfig();
+        }
+        if (this.threadPool == null) {
+            createDefaultThreadPool();
+        }
     }
 }
