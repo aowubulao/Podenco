@@ -1,4 +1,4 @@
-package com.neoniou.bot.entity;
+package com.neoniou.bot.entity.handler;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

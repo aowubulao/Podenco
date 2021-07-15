@@ -1,4 +1,4 @@
-package com.neoniou.bot.entity;
+package com.neoniou.bot.entity.handler;
 
 import com.neoniou.bot.message.annotation.handler.BotHandler;
 import com.neoniou.bot.message.consts.MessageType;
@@ -35,6 +35,8 @@ public class HandlerClass {
     private String matchStr;
 
     private int matchRule;
+
+    private boolean async;
 
     private String fatherName;
 

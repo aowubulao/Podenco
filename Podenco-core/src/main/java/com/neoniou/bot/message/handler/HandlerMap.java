@@ -4,8 +4,8 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.neoniou.bot.entity.HandlerClass;
-import com.neoniou.bot.entity.HandlerPermit;
+import com.neoniou.bot.entity.handler.HandlerClass;
+import com.neoniou.bot.entity.handler.HandlerPermit;
 
 import java.util.HashMap;
 import java.util.List;

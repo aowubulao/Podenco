@@ -1,7 +1,7 @@
 package com.neoniou.bot.message.handler;
 
 import cn.hutool.core.util.ClassUtil;
-import com.neoniou.bot.entity.HandlerClass;
+import com.neoniou.bot.entity.handler.HandlerClass;
 import com.neoniou.bot.message.annotation.handler.BotHandler;
 
 import java.lang.reflect.Method;
@@ -41,6 +41,7 @@ public class HandlerRegistrar {
                 .role(botHandler.role())
                 .matchStr(botHandler.matchStr())
                 .matchRule(botHandler.matchRule())
+                .async(botHandler.async())
                 .type(botHandler.type())
                 .build();
 

@@ -9,6 +9,8 @@ import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.BotFactory;
 import net.mamoe.mirai.utils.BotConfiguration;
 
+import java.util.concurrent.ExecutorService;
+
 /**
  * @author Neo.Zzj
  * @date 2021/7/8
@@ -17,6 +19,8 @@ import net.mamoe.mirai.utils.BotConfiguration;
 public class PodencoCore {
 
     private static Bot bot;
+
+    private static ExecutorService threadPool;
 
     public static void run(Class<?> mainClass, String... args) {
         run(mainClass, new PodencoConfig(), args);
@@ -27,6 +31,7 @@ public class PodencoCore {
         AnnotationRegistrar.run(mainClass);
         //配置检查
         config.checkConfig();
+        threadPool = config.getThreadPool();
         //启动Bot
         startBot(config);
         //健康检查
@@ -74,5 +79,9 @@ public class PodencoCore {
 
     public static Bot getBot() {
         return bot;
+    }
+
+    public static void runAsync(Runnable runnable) {
+        threadPool.execute(runnable);
     }
 }

@@ -38,7 +38,7 @@ public @interface BotHandler {
     MessageType[] type() default {MessageType.GROUP, MessageType.FRIEND};
 
     /**
-     * 匹配此方法的字符串
+     * 匹配此方法的字符串，默认全匹配
      *
      * @return String
      */
@@ -49,8 +49,17 @@ public @interface BotHandler {
      * 1：正则匹配
      * 2：相等匹配
      * 3：包含匹配
+     * 4：StartWith匹配
+     * 5：EndWith匹配
      *
      * @return String
      */
     int matchRule() default 2;
+
+    /**
+     * 方法是否异步执行
+     *
+     * @return boolean
+     */
+    boolean async() default false;
 }
