@@ -1,16 +1,16 @@
 package com.neoniou.bot.entity.handler;
 
 import com.neoniou.bot.message.annotation.handler.BotHandler;
-import com.neoniou.bot.message.consts.MessageType;
-import com.neoniou.bot.message.consts.RoleEnum;
+import com.neoniou.bot.consts.MessageType;
+import com.neoniou.bot.consts.RoleEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Neo.Zzj
@@ -27,6 +27,8 @@ public class HandlerClass {
     private Method method;
 
     private String name;
+
+    private String desc;
 
     private RoleEnum role;
 
@@ -57,5 +59,22 @@ public class HandlerClass {
         if (this.fatherName.equals(this.name)) {
             throw new RuntimeException("Handler Name重复！");
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Handler-").append(name).append("：");
+        if (!"".equals(desc)) {
+            sb.append("\ndesc: ").append(desc);
+        }
+        sb.append("\nrole: ").append(role.getRoleName());
+        sb.append("\ntype: ").append(Arrays.toString(type));
+        sb.append("\nmatchStr: ").append(matchStr);
+        sb.append("\nmatchRule: ").append(matchRule);
+        sb.append("\ngroups: ").append(groups.size() == 0 ? "无" : groups);
+        sb.append("\nfriends: ").append(friends.size() == 0 ? "无" : friends);
+
+        return sb.toString();
     }
 }

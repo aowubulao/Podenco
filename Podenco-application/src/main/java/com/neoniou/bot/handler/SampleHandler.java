@@ -15,4 +15,9 @@ public class SampleHandler {
     public void replyHelloMapping(BotMessage<MessageEvent> message) {
         message.getEvent().getSubject().sendMessage("Hello World!");
     }
+
+    @BotHandler(name = "hello2", matchStr = "HelloWorld2")
+    public void sample2(BotMessage<MessageEvent> message) {
+        message.getEvent().getSubject().sendMessage("Hello World!");
+    }
 }

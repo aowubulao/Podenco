@@ -5,7 +5,9 @@ import com.neoniou.bot.core.authority.AuthorityMap;
 import com.neoniou.bot.entity.handler.HandlerClass;
 import com.neoniou.bot.entity.message.BotMessage;
 import com.neoniou.bot.entity.message.MatchReturn;
-import com.neoniou.bot.message.consts.RoleEnum;
+import com.neoniou.bot.consts.MessageType;
+import com.neoniou.bot.consts.RoleEnum;
+import com.neoniou.bot.core.ClassExecutor;
 import com.neoniou.bot.utils.MessageUtil;
 import lombok.extern.slf4j.Slf4j;
 import net.mamoe.mirai.event.events.FriendMessageEvent;
@@ -21,11 +23,14 @@ import java.util.regex.Pattern;
  * @date 2021/7/15
  */
 @Slf4j
-public class MessageRoute {
+public class MessageRouter {
 
     public static void handleGroup(GroupMessageEvent event) {
         for (Map.Entry<String, HandlerClass> entry : HandlerMap.HANDLER_MAP.entrySet()) {
             HandlerClass handler = entry.getValue();
+            if (!checkType(MessageType.GROUP.getId(), handler.getType())) {
+                continue;
+            }
             if (!isPermitGroup(event, handler)) {
                 continue;
             }
@@ -43,6 +48,9 @@ public class MessageRoute {
     public static void handleFriend(FriendMessageEvent event) {
         for (Map.Entry<String, HandlerClass> entry : HandlerMap.HANDLER_MAP.entrySet()) {
             HandlerClass handler = entry.getValue();
+            if (!checkType(MessageType.FRIEND.getId(), handler.getType())) {
+                continue;
+            }
             if (!isPermitFriend(event, handler)) {
                 continue;
             }
@@ -57,23 +65,24 @@ public class MessageRoute {
         }
     }
 
+    private static boolean checkType(Integer needId, MessageType[] type) {
+        for (MessageType messageType : type) {
+            if (messageType.getId().equals(needId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static <T> void executeHandler(HandlerClass handler, MatchReturn matchReturn, T event, String messageBody) {
         Class<?> clazz = handler.getClazz();
         Method method = handler.getMethod();
         BotMessage<T> message = new BotMessage<>(event, messageBody, matchReturn.getStr());
 
         if (handler.isAsync()) {
-            PodencoCore.runAsync(() -> execute(clazz, method, message));
+            PodencoCore.runAsync(() -> ClassExecutor.execMethod(clazz, method, message));
         } else {
-            execute(clazz, method, message);
-        }
-    }
-
-    private static <T> void execute(Class<?> clazz, Method method, BotMessage<T> message) {
-        try {
-            method.invoke(clazz.newInstance(), message);
-        } catch (Exception e) {
-            log.error("Handler--{}:{} execute error: ", clazz.getName(), method.getName(), e);
+            ClassExecutor.execMethod(clazz, method, message);
         }
     }
 
@@ -89,12 +98,14 @@ public class MessageRoute {
         long senderId = event.getFriend().getId();
 
         RoleEnum role = handler.getRole();
-        return isAuth(senderId, role) && handler.getFriends().containsKey(senderId);
+        return isAuth(senderId, role);
     }
 
     private static boolean isAuth(long senderId, RoleEnum needRole) {
         if (senderId == AuthorityMap.owner) {
             return true;
+        } else if (needRole.equals(RoleEnum.OWNER)) {
+            return false;
         }
         if (needRole.equals(RoleEnum.ADMIN)) {
             return AuthorityMap.ADMIN_MAP.containsKey(senderId);

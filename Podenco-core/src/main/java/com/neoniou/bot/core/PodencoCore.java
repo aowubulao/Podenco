@@ -43,6 +43,9 @@ public class PodencoCore {
     public static void startBot(PodencoConfig config) {
         bot = BotFactory.INSTANCE.newBot(config.getQq(), config.getPassword(), getBotConfiguration(config));
         bot.login();
+
+        //开始监听通道
+        EventListener.startListen(bot);
     }
 
     @SuppressWarnings("InfiniteLoopStatement")

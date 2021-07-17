@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,12 @@ public class HandlerPermit {
 
     private String fatherName;
 
-    private Map<Long, Integer> groups;
+    private Map<Long, Integer> groups = new HashMap<>();
 
-    private Map<Long, Integer> friends;
+    private Map<Long, Integer> friends = new HashMap<>();
+
+    public HandlerPermit(String fatherName, String name) {
+        this.name = name;
+        this.fatherName = fatherName;
+    }
 }

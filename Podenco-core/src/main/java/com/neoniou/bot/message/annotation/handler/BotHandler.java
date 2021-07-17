@@ -1,7 +1,7 @@
 package com.neoniou.bot.message.annotation.handler;
 
-import com.neoniou.bot.message.consts.MessageType;
-import com.neoniou.bot.message.consts.RoleEnum;
+import com.neoniou.bot.consts.MessageType;
+import com.neoniou.bot.consts.RoleEnum;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -22,6 +22,13 @@ public @interface BotHandler {
      * @return String
      */
     String name() default "";
+
+    /**
+     * 方法描述
+     *
+     * @return String
+     */
+    String desc() default "";
 
     /**
      * 访问权限

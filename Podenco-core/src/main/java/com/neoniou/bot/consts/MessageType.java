@@ -1,4 +1,4 @@
-package com.neoniou.bot.message.consts;
+package com.neoniou.bot.consts;
 
 import lombok.Getter;
 

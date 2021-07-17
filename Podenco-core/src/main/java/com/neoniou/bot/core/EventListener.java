@@ -1,6 +1,6 @@
 package com.neoniou.bot.core;
 
-import com.neoniou.bot.message.handler.MessageRoute;
+import com.neoniou.bot.message.handler.MessageRouter;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.event.events.FriendMessageEvent;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
@@ -17,14 +17,14 @@ public class EventListener {
     }
 
     private static void listenGroup(Bot bot) {
-        bot.getEventChannel().subscribeAlways(GroupMessageEvent.class, e -> {
-            PodencoCore.runAsync(() -> MessageRoute.handleGroup(e));
-        });
+        bot.getEventChannel().subscribeAlways(GroupMessageEvent.class, e ->
+            PodencoCore.runAsync(() -> MessageRouter.handleGroup(e))
+        );
     }
 
     private static void listenFriend(Bot bot) {
-        bot.getEventChannel().subscribeAlways(FriendMessageEvent.class, e -> {
-            PodencoCore.runAsync(() -> MessageRoute.handleFriend(e));
-        });
+        bot.getEventChannel().subscribeAlways(FriendMessageEvent.class, e ->
+                PodencoCore.runAsync(() -> MessageRouter.handleFriend(e))
+        );
     }
 }
