@@ -1,5 +1,7 @@
 package com.neoniou.bot.core;
 
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.resource.ClassPathResource;
 import com.neoniou.bot.config.PodencoConfig;
 import com.neoniou.bot.core.log.PodencoLogger;
 import com.neoniou.bot.message.AnnotationRegistrar;
@@ -27,6 +29,8 @@ public class PodencoCore {
     }
 
     public static void run(Class<?> mainClass, PodencoConfig config, String... args) {
+        //输出Banner
+        printBanner();
         //注解初始化
         AnnotationRegistrar.run(mainClass);
         //配置检查
@@ -38,6 +42,12 @@ public class PodencoCore {
         if (config.isHealthCheck()) {
             ThreadUtil.createSingle().execute(() -> startHealthCheck(config));
         }
+    }
+
+    private static void printBanner() {
+        ClassPathResource banner = new ClassPathResource("banner.txt");
+        String bannerStr = banner.readUtf8Str();
+        System.out.println(bannerStr);
     }
 
     public static void startBot(PodencoConfig config) {

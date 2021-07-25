@@ -8,6 +8,7 @@ import com.neoniou.bot.message.annotation.application.StartMethod;
 import com.neoniou.bot.message.annotation.handler.BotHandler;
 import com.neoniou.bot.core.ClassExecutor;
 import com.neoniou.bot.utils.ThreadUtil;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
 import java.util.Set;
@@ -16,6 +17,7 @@ import java.util.Set;
  * @author Neo.Zzj
  * @date 2021/7/9
  */
+@Slf4j
 public class HandlerRegistrar {
 
     private static final String CORE_HANDLER_PACKAGE = "com.neoniou.bot.core.handler";
