@@ -1,12 +1,16 @@
 package com.neoniou.bot.core.handler;
 
 import cn.hutool.core.util.ClassUtil;
+import cn.hutool.cron.CronUtil;
+import cn.hutool.cron.task.Task;
 import com.neoniou.bot.core.ClassExecutor;
 import com.neoniou.bot.core.PodencoCore;
+import com.neoniou.bot.core.annotation.application.BotSchedule;
 import com.neoniou.bot.core.annotation.application.StartMethod;
 import com.neoniou.bot.core.annotation.handler.BotHandler;
 import com.neoniou.bot.core.authority.AuthorityMap;
 import com.neoniou.bot.core.entity.HandlerClass;
+import com.neoniou.bot.exception.ScheduleException;
 import com.neoniou.bot.utils.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,12 +32,18 @@ public class HandlerRegistrar {
         AuthorityMap.initConfig();
         Set<Class<?>> classes = getClasses(packageName);
 
+        boolean hasSchedule = false;
         for (Class<?> clazz : classes) {
             //注册Handler
             execBotHandler(clazz);
             //执行启动方法
             execStartMethod(clazz);
             //注册定时任务
+            hasSchedule |= execScheduleTask(clazz);
+        }
+        if (hasSchedule) {
+            CronUtil.setMatchSecond(true);
+            CronUtil.start();
         }
     }
 
@@ -81,6 +91,28 @@ public class HandlerRegistrar {
         for (Method method : methodList) {
             ClassExecutor.execMethod(clazz, method);
         }
+    }
+
+    private static boolean execScheduleTask(Class<?> clazz) {
+        boolean flag = false;
+        Method[] methods = clazz.getDeclaredMethods();
+
+        for (Method method : methods) {
+            BotSchedule botSchedule = method.getAnnotation(BotSchedule.class);
+            if (botSchedule == null) {
+                continue;
+            }
+            flag = true;
+
+            String cron = botSchedule.cron();
+            try {
+                CronUtil.schedule(cron, (Task) () ->
+                        ClassExecutor.execMethod(clazz, method));
+            } catch (Exception e) {
+                throw new ScheduleException(e.getMessage());
+            }
+        }
+        return flag;
     }
 
     @SuppressWarnings("all")

@@ -5,6 +5,7 @@ import cn.hutool.json.JSONUtil;
 import com.neoniou.bot.core.PodencoCore;
 import com.neoniou.bot.core.entity.HandlerClass;
 import com.neoniou.bot.core.entity.HandlerPermit;
+import com.neoniou.bot.exception.HandlerDuplicationException;
 import lombok.Synchronized;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class HandlerMap {
     public static void put(HandlerClass handler) {
         handler.checkName();
         if (HANDLER_MAP.containsKey(handler.getName())) {
-            throw new RuntimeException("Handler Name重复: " + handler.getFatherName() + ":" + handler.getName());
+            throw new HandlerDuplicationException("Handler Name重复: " + handler.getFatherName() + ":" + handler.getName());
         }
 
         HandlerPermit permit = getPermitMap(handler);
