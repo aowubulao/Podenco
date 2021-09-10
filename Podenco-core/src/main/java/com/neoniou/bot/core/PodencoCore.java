@@ -1,6 +1,5 @@
 package com.neoniou.bot.core;
 
-import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.resource.ClassPathResource;
 import com.neoniou.bot.config.PodencoConfig;
 import com.neoniou.bot.core.log.PodencoLogger;
@@ -31,11 +30,11 @@ public class PodencoCore {
     public static void run(Class<?> mainClass, PodencoConfig config, String... args) {
         //输出Banner
         printBanner();
-        //注解初始化
-        AnnotationRegistrar.run(mainClass);
         //配置检查
         config.checkConfig();
         threadPool = config.getThreadPool();
+        //注解初始化
+        AnnotationRegistrar.run(mainClass);
         //启动Bot
         startBot(config);
         //健康检查

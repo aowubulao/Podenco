@@ -2,7 +2,9 @@ package com.neoniou.bot.handler;
 
 import com.neoniou.bot.entity.message.BotMessage;
 import com.neoniou.bot.message.annotation.handler.BotHandler;
+import com.neoniou.bot.utils.MessageUtil;
 import net.mamoe.mirai.event.events.MessageEvent;
+import net.mamoe.mirai.message.data.Image;
 
 /**
  * @author Neo.Zzj
@@ -11,13 +13,15 @@ import net.mamoe.mirai.event.events.MessageEvent;
 @BotHandler(name = "Sample")
 public class SampleHandler {
 
-    @BotHandler(name = "replyHelloMapping", matchStr = "HelloWorld")
+    @BotHandler(name = "replyHelloMapping", matchStr = "hello")
     public void replyHelloMapping(BotMessage<MessageEvent> message) {
-        message.getEvent().getSubject().sendMessage("Hello World!");
+        Image image = MessageUtil.uploadImage(
+                "https://img.neoniou.com/blog/20210820202649.png", message.getEvent());
+        MessageUtil.sendMessage(message, image);
     }
 
     @BotHandler(name = "hello2", matchStr = "HelloWorld2")
     public void sample2(BotMessage<MessageEvent> message) {
-        message.getEvent().getSubject().sendMessage("Hello World!");
+        MessageUtil.sendMessage(message, "Hello World!");
     }
 }

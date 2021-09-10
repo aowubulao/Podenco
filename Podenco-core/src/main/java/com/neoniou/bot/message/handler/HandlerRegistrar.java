@@ -1,16 +1,18 @@
 package com.neoniou.bot.message.handler;
 
 import cn.hutool.core.util.ClassUtil;
+import com.neoniou.bot.core.ClassExecutor;
 import com.neoniou.bot.core.PodencoCore;
 import com.neoniou.bot.core.authority.AuthorityMap;
 import com.neoniou.bot.entity.handler.HandlerClass;
 import com.neoniou.bot.message.annotation.application.StartMethod;
 import com.neoniou.bot.message.annotation.handler.BotHandler;
-import com.neoniou.bot.core.ClassExecutor;
 import com.neoniou.bot.utils.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -53,6 +55,8 @@ public class HandlerRegistrar {
 
     private static void execStartMethod(Class<?> clazz) {
         Method[] methods = clazz.getDeclaredMethods();
+
+        List<Method> methodList = new ArrayList<>();
         for (Method method : methods) {
             StartMethod startMethod = method.getAnnotation(StartMethod.class);
             if (startMethod == null) {
@@ -69,7 +73,13 @@ public class HandlerRegistrar {
                             ClassExecutor.execMethod(clazz, method)
                     );
                 }
+            } else {
+                methodList.add(method);
             }
+        }
+        //Execute synchronized method in the last
+        for (Method method : methodList) {
+            ClassExecutor.execMethod(clazz, method);
         }
     }
 

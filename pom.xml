@@ -16,7 +16,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <mirai-core.version>2.6.7</mirai-core.version>
+        <mirai-core.version>2.7.0</mirai-core.version>
         <kotlin.version>1.4.32</kotlin.version>
         <kotlinx.version>1.4.3</kotlinx.version>
         <lombok.version>1.18.12</lombok.version>
