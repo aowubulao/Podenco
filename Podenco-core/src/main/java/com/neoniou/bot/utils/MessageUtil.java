@@ -1,7 +1,7 @@
 package com.neoniou.bot.utils;
 
 import cn.hutool.http.HttpRequest;
-import com.neoniou.bot.entity.message.BotMessage;
+import com.neoniou.bot.core.entity.BotMessage;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.contact.ContactList;

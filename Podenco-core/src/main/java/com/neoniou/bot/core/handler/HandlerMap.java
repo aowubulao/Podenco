@@ -1,12 +1,10 @@
-package com.neoniou.bot.message.handler;
+package com.neoniou.bot.core.handler;
 
 import cn.hutool.core.io.FileUtil;
-import cn.hutool.json.JSONArray;
-import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.neoniou.bot.core.PodencoCore;
-import com.neoniou.bot.entity.handler.HandlerClass;
-import com.neoniou.bot.entity.handler.HandlerPermit;
+import com.neoniou.bot.core.entity.HandlerClass;
+import com.neoniou.bot.core.entity.HandlerPermit;
 import lombok.Synchronized;
 
 import java.util.ArrayList;

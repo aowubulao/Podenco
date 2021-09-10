@@ -1,6 +1,6 @@
 package com.neoniou.bot.core;
 
-import com.neoniou.bot.message.handler.MessageRouter;
+import com.neoniou.bot.core.handler.MessageRouter;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.event.events.FriendMessageEvent;
 import net.mamoe.mirai.event.events.GroupMessageEvent;

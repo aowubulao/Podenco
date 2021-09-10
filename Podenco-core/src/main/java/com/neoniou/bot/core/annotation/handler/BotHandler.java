@@ -1,4 +1,4 @@
-package com.neoniou.bot.message.annotation.handler;
+package com.neoniou.bot.core.annotation.handler;
 
 import com.neoniou.bot.consts.MessageType;
 import com.neoniou.bot.consts.RoleEnum;

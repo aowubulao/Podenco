@@ -1,12 +1,12 @@
-package com.neoniou.bot.message.handler;
+package com.neoniou.bot.core.handler;
 
 import cn.hutool.core.util.ClassUtil;
 import com.neoniou.bot.core.ClassExecutor;
 import com.neoniou.bot.core.PodencoCore;
+import com.neoniou.bot.core.annotation.application.StartMethod;
+import com.neoniou.bot.core.annotation.handler.BotHandler;
 import com.neoniou.bot.core.authority.AuthorityMap;
-import com.neoniou.bot.entity.handler.HandlerClass;
-import com.neoniou.bot.message.annotation.application.StartMethod;
-import com.neoniou.bot.message.annotation.handler.BotHandler;
+import com.neoniou.bot.core.entity.HandlerClass;
 import com.neoniou.bot.utils.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +22,7 @@ import java.util.Set;
 @Slf4j
 public class HandlerRegistrar {
 
-    private static final String CORE_HANDLER_PACKAGE = "com.neoniou.bot.core.handler";
+    private static final String CORE_HANDLER_PACKAGE = "com.neoniou.bot.core.handler.controller";
 
     public static void start(String packageName) {
         AuthorityMap.initConfig();

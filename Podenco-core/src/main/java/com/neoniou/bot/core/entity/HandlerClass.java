@@ -1,8 +1,8 @@
-package com.neoniou.bot.entity.handler;
+package com.neoniou.bot.core.entity;
 
-import com.neoniou.bot.message.annotation.handler.BotHandler;
 import com.neoniou.bot.consts.MessageType;
 import com.neoniou.bot.consts.RoleEnum;
+import com.neoniou.bot.core.annotation.handler.BotHandler;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

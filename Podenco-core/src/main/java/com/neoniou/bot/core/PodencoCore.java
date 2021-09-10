@@ -3,7 +3,6 @@ package com.neoniou.bot.core;
 import cn.hutool.core.io.resource.ClassPathResource;
 import com.neoniou.bot.config.PodencoConfig;
 import com.neoniou.bot.core.log.PodencoLogger;
-import com.neoniou.bot.message.AnnotationRegistrar;
 import com.neoniou.bot.utils.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 import net.mamoe.mirai.Bot;

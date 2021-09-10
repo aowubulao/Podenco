@@ -1,11 +1,10 @@
-package com.neoniou.bot.entity.handler;
+package com.neoniou.bot.core.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

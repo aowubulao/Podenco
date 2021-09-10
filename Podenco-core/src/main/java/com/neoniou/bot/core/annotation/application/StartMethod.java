@@ -1,4 +1,4 @@
-package com.neoniou.bot.message.annotation.application;
+package com.neoniou.bot.core.annotation.application;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

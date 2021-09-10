@@ -1,7 +1,6 @@
-package com.neoniou.bot.entity.message;
+package com.neoniou.bot.core.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

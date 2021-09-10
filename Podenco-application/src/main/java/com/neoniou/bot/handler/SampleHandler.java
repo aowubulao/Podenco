@@ -1,7 +1,7 @@
 package com.neoniou.bot.handler;
 
-import com.neoniou.bot.entity.message.BotMessage;
-import com.neoniou.bot.message.annotation.handler.BotHandler;
+import com.neoniou.bot.core.annotation.handler.BotHandler;
+import com.neoniou.bot.core.entity.BotMessage;
 import com.neoniou.bot.utils.MessageUtil;
 import net.mamoe.mirai.event.events.MessageEvent;
 import net.mamoe.mirai.message.data.Image;

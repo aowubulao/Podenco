@@ -1,7 +1,7 @@
 package com.neoniou.bot;
 
 import com.neoniou.bot.core.PodencoCore;
-import com.neoniou.bot.message.annotation.application.BotComponentScan;
+import com.neoniou.bot.core.annotation.application.BotComponentScan;
 
 /**
  * @author Neo.Zzj

@@ -1,20 +1,16 @@
-package com.neoniou.bot.core.handler;
+package com.neoniou.bot.core.handler.controller;
 
-import com.neoniou.bot.core.PodencoCore;
-import com.neoniou.bot.core.authority.AuthorityMap;
-import com.neoniou.bot.entity.message.BotMessage;
-import com.neoniou.bot.message.annotation.handler.BotHandler;
 import com.neoniou.bot.consts.MessageType;
 import com.neoniou.bot.consts.RoleEnum;
-import com.neoniou.bot.message.handler.HandlerMap;
+import com.neoniou.bot.core.PodencoCore;
+import com.neoniou.bot.core.annotation.handler.BotHandler;
+import com.neoniou.bot.core.authority.AuthorityMap;
+import com.neoniou.bot.core.entity.BotMessage;
+import com.neoniou.bot.core.handler.HandlerMap;
 import lombok.extern.slf4j.Slf4j;
 import net.mamoe.mirai.contact.ContactList;
 import net.mamoe.mirai.contact.Group;
 import net.mamoe.mirai.event.events.MessageEvent;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 /**
  * @author Neo.Zzj

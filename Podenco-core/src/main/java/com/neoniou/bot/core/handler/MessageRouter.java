@@ -1,13 +1,13 @@
-package com.neoniou.bot.message.handler;
+package com.neoniou.bot.core.handler;
 
-import com.neoniou.bot.core.PodencoCore;
-import com.neoniou.bot.core.authority.AuthorityMap;
-import com.neoniou.bot.entity.handler.HandlerClass;
-import com.neoniou.bot.entity.message.BotMessage;
-import com.neoniou.bot.entity.message.MatchReturn;
 import com.neoniou.bot.consts.MessageType;
 import com.neoniou.bot.consts.RoleEnum;
 import com.neoniou.bot.core.ClassExecutor;
+import com.neoniou.bot.core.PodencoCore;
+import com.neoniou.bot.core.authority.AuthorityMap;
+import com.neoniou.bot.core.entity.BotMessage;
+import com.neoniou.bot.core.entity.HandlerClass;
+import com.neoniou.bot.core.entity.MatchReturn;
 import com.neoniou.bot.utils.MessageUtil;
 import lombok.extern.slf4j.Slf4j;
 import net.mamoe.mirai.event.events.FriendMessageEvent;

@@ -1,7 +1,7 @@
-package com.neoniou.bot.message;
+package com.neoniou.bot.core;
 
-import com.neoniou.bot.message.annotation.application.BotComponentScan;
-import com.neoniou.bot.message.handler.HandlerRegistrar;
+import com.neoniou.bot.core.annotation.application.BotComponentScan;
+import com.neoniou.bot.core.handler.HandlerRegistrar;
 
 /**
  * @author Neo.Zzj
